@@ -2,6 +2,13 @@
 
 create react app
 configured tailwind css
+routing of app
+auth forms
+firebase setup
+deploying app to production
+create signup user account in firebase
+Implement Signin/Signup user API
+Created a redux store with user Slice
 
 # Basic Featutres
 
