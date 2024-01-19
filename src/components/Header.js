@@ -22,7 +22,7 @@ const Header = () => {
       });
   };
   return (
-    <div className="absolute items-center px-4   bg-gradient-to-b from-black z-10 w-full flex justify-between text-white">
+    <div className="absolute items-center px-4 bg-[darkslategray] sm:bg-transparent  bg-gradient-to-b from-black z-10 w-full flex justify-center sm:justify-between text-white">
       <div>
         <img src={logo} className="h-40 " alt="logo" />
       </div>
