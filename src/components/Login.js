@@ -7,12 +7,11 @@ import {
   updateProfile,
 } from "firebase/auth";
 import { auth } from "../utils/firebase";
-import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { addUser } from "../utils/redux/userSlice";
+import { USER_AVATAR } from "../utils/constants";
 
 const Login = () => {
-  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const name = useRef();
@@ -42,8 +41,7 @@ const Login = () => {
           setIsSignIn(true);
           updateProfile(user, {
             displayName: name.current.value,
-            photoURL:
-              "https://wallpapers.com/images/high/netflix-profile-pictures-1000-x-1000-vnl1thqrh02x7ra2.webp",
+            photoURL: USER_AVATAR,
           })
             .then(() => {
               // Profile updated!
@@ -63,7 +61,6 @@ const Login = () => {
               setErrorMessage(error, message);
             });
 
-          console.log(user);
           // ...
         })
         .catch((error) => {
@@ -82,9 +79,7 @@ const Login = () => {
         .then((userCredential) => {
           // Signed in
           const user = userCredential.user;
-          navigate("/browse");
 
-          console.log("Signed in user ", user);
           // ...
         })
         .catch((error) => {
@@ -94,6 +89,7 @@ const Login = () => {
         });
     }
   };
+
   const backgroundImageUrl =
     'url("https://assets.nflxext.com/ffe/siteui/vlv3/df6621a3-890c-4ca0-b698-90bd5152f3d1/20a59be7-7062-4991-bca0-805e9a7f2716/IN-en-20240107-trifectadaily-perspective_alpha_website_large.jpg")';
   const containerStyle = {
@@ -101,10 +97,11 @@ const Login = () => {
     backgroundSize: "cover", // Adjust as needed
     backgroundRepeat: "no-repeat", // Adjust as needed
     height: "100vh",
+    backdropFilter: "blur(8px)",
     // Add more background-related styles if necessary
   };
   return (
-    <div className="" style={containerStyle}>
+    <div className="sm:bg-blur sm:backdrop-blur-2xl sm:h-screen sm:bg-cover sm:bg-no-repeat sm:bg-[url('https://assets.nflxext.com/ffe/siteui/vlv3/df6621a3-890c-4ca0-b698-90bd5152f3d1/20a59be7-7062-4991-bca0-805e9a7f2716/IN-en-20240107-trifectadaily-perspective_alpha_website_large.jpg')] ">
       <Header />
       {/* <div className="absolute">
         <img
@@ -116,7 +113,7 @@ const Login = () => {
       <form
         onSubmit={(e) => e.preventDefault()}
         action=""
-        className="  absolute my-36 mx-auto right-0 left-0 w-full sm:w-6/12 md:w-4/12 lg:w-3/12  p-12 bg-black bg-opacity-85 text-white"
+        className="  absolute my-36 mx-auto right-0 left-0 h-full sm:h-auto  w-full sm:w-6/12 md:w-4/12 lg:w-3/12  p-12 bg-black bg-opacity-85 text-white"
       >
         <h1 className="font-bold text-lg sm:text-3xl py-4">
           {isSignIn ? "Sign In" : "Sign Up"}

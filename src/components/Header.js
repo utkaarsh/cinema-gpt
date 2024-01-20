@@ -1,12 +1,40 @@
-import React from "react";
-import logo from "../assets/main-logo-white-transparent.svg";
-import { signOut } from "firebase/auth";
+import React, { useEffect } from "react";
+import { onAuthStateChanged, signOut } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 import { auth } from "../utils/firebase";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { addUser, removeUser } from "../utils/redux/userSlice";
+import { main_logo } from "../utils/constants";
 
 const Header = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        // User is signed in, see docs for a list of available properties
+        // https://firebase.google.com/docs/reference/js/auth.user
+        const { uid, email, displayName, photoURL } = user;
+        dispatch(
+          addUser({
+            uid: uid,
+            email: email,
+            displayName: displayName,
+            photoURL: photoURL,
+          })
+        );
+        navigate("/browse");
+      } else {
+        // User is signed out
+        dispatch(removeUser());
+        navigate("/");
+      }
+    });
+
+    //Unsubscribe when component unmounts
+    return () => unsubscribe();
+  }, []);
   const user = useSelector((store) => store.user);
   const handleSignout = () => {
     console.log("Signed Out");
@@ -14,17 +42,16 @@ const Header = () => {
     signOut(auth)
       .then(() => {
         // Sign-out successful.
-        navigate("/");
       })
       .catch((error) => {
         // An error happened.
-        navigate("/error");
+        console.log("Encountered", error);
       });
   };
   return (
-    <div className="absolute items-center px-4 bg-[darkslategray] sm:bg-transparent  bg-gradient-to-b from-black z-10 w-full flex justify-center sm:justify-between text-white">
+    <div className="absolute items-center px-4 bg-[darkslategray] sm:bg-transparent  bg-gradient-to-b from-black  z-10 w-full flex justify-center sm:justify-between text-white">
       <div>
-        <img src={logo} className="h-40 " alt="logo" />
+        <img src={main_logo} className="h-40 " alt="logo" />
       </div>
       {user && (
         <div className="flex p-4">
