@@ -10,7 +10,8 @@ import { auth } from "../utils/firebase";
 import { useDispatch } from "react-redux";
 import { addUser } from "../utils/redux/userSlice";
 import { USER_AVATAR } from "../utils/constants";
-
+import { ErrorMessage, useFormik } from "formik";
+import { validate } from "../utils/constants";
 const Login = () => {
   const dispatch = useDispatch();
 
@@ -24,23 +25,21 @@ const Login = () => {
     setIsSignIn(!isSignIn);
   };
 
-  const handleLogin = () => {
-    const message = CheckValidData(email.current.value, password.current.value);
+  const handleLogin = (values) => {
+    const { email, password, name } = values;
+
+    const message = CheckValidData(email, password);
     setErrorMessage(message);
     if (!isSignIn) {
       //signup logic
 
-      createUserWithEmailAndPassword(
-        auth,
-        email.current.value,
-        password.current.value
-      )
+      createUserWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
           // Signed up
           const user = userCredential.user;
           setIsSignIn(true);
           updateProfile(user, {
-            displayName: name.current.value,
+            displayName: name,
             photoURL: USER_AVATAR,
           })
             .then(() => {
@@ -71,14 +70,11 @@ const Login = () => {
         });
     } else {
       //sign in logic
-      signInWithEmailAndPassword(
-        auth,
-        email.current.value,
-        password.current.value
-      )
+      signInWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
           // Signed in
           const user = userCredential.user;
+          console.log(email);
 
           // ...
         })
@@ -92,14 +88,60 @@ const Login = () => {
 
   const backgroundImageUrl =
     'url("https://assets.nflxext.com/ffe/siteui/vlv3/df6621a3-890c-4ca0-b698-90bd5152f3d1/20a59be7-7062-4991-bca0-805e9a7f2716/IN-en-20240107-trifectadaily-perspective_alpha_website_large.jpg")';
-  const containerStyle = {
-    backgroundImage: backgroundImageUrl,
-    backgroundSize: "cover", // Adjust as needed
-    backgroundRepeat: "no-repeat", // Adjust as needed
-    height: "100vh",
-    backdropFilter: "blur(8px)",
-    // Add more background-related styles if necessary
-  };
+  // const containerStyle = {
+  //   backgroundImage: backgroundImageUrl,
+  //   backgroundSize: "cover",
+  //   backgroundRepeat: "no-repeat",
+  //   height: "100vh",
+  //   backdropFilter: "blur(8px)",
+  // };
+
+  const formik = useFormik({
+    initialValues: {
+      name: "",
+      password: "",
+      email: "",
+    },
+    validate,
+    onSubmit: (values) => {
+      handleLogin(values);
+    },
+  });
+
+  // const onSubmit = async (values, { setSubmitting, setFieldError }) => {
+  //   const { email, password, name } = values;
+  //   const isSignIn = true; // Determine the sign-in or sign-up logic here
+
+  //   try {
+  //     if (!isSignIn) {
+  //       // Sign-up logic
+  //       const userCredential = await createUserWithEmailAndPassword(
+  //         auth,
+  //         email,
+  //         password
+  //       );
+  //       const user = userCredential.user;
+  //       await updateProfile(user, {
+  //         displayName: name,
+  //         photoURL: USER_AVATAR,
+  //       });
+
+  //       // Dispatch the user information to Redux store
+  //       const { uid, email, displayName, photoURL } = auth.currentUser;
+  //       dispatch(addUser({ uid, email, displayName, photoURL }));
+  //     } else {
+  //       // Sign-in logic
+  //       await signInWithEmailAndPassword(auth, email, password);
+  //     }
+  //   } catch (error) {
+  //     const errorCode = error.code;
+  //     const errorMessage = error.message;
+  //     setFieldError("general", `${errorCode} ${errorMessage}`);
+  //   } finally {
+  //     setSubmitting(false);
+  //   }
+  // };
+
   return (
     <div className="sm:bg-blur sm:backdrop-blur-2xl sm:h-screen sm:bg-cover sm:bg-no-repeat sm:bg-[url('https://assets.nflxext.com/ffe/siteui/vlv3/df6621a3-890c-4ca0-b698-90bd5152f3d1/20a59be7-7062-4991-bca0-805e9a7f2716/IN-en-20240107-trifectadaily-perspective_alpha_website_large.jpg')] ">
       <Header />
@@ -120,32 +162,61 @@ const Login = () => {
         </h1>
         {!isSignIn && (
           <input
-            ref={name}
+            id="name"
+            name="name"
             type="text"
+            onChange={formik.handleChange}
+            value={formik.values.name}
+            onBlur={formik.handleBlur}
             placeholder="Full Name"
             className="bg-gray-800 bg-opacity-75 p-4 m-2 w-full"
           />
         )}
 
-        <input
-          ref={email}
-          type="text"
-          placeholder="Email"
-          className="bg-gray-800 bg-opacity-75 p-4 m-2 w-full"
-        />
+        {/* <ErrorMessage
+          name="name"
+          component="p"
+          className="py-2 mx-2 text-red-800 font-bold"
+        /> */}
+        {!isSignIn && formik.touched.name && formik.errors.name ? (
+          <div className="text-red-800">{formik.errors.name}</div>
+        ) : null}
 
         <input
-          ref={password}
-          type="text"
-          placeholder="Password"
+          id="email"
+          name="email"
+          type="email"
+          placeholder="Email"
+          onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
+          value={formik.values.email}
           className="bg-gray-800 bg-opacity-75 p-4 m-2 w-full"
         />
+        {formik.touched.email && formik.errors.email ? (
+          <div className="text-red-800">{formik.errors.email}</div>
+        ) : null}
+
+        <input
+          id="password"
+          name="password"
+          type="password"
+          onChange={formik.handleChange}
+          value={formik.values.password}
+          placeholder="Password"
+          onBlur={formik.handleBlur}
+          className="bg-gray-800 bg-opacity-75 p-4 m-2 w-full"
+        />
+        {formik.touched.password && formik.errors.password ? (
+          <div className="text-red-800">{formik.errors.password}</div>
+        ) : null}
+
         {errorMessage && (
-          <p className="py-2 mx-2 text-red-800 font-bold"> {errorMessage}</p>
+          <p className="py-2 mx-2 text-red-800 font-bold">{errorMessage}</p>
         )}
         <button
           className="p-4 m-2 bg-red-700 w-full rounded-lg font-bold"
-          onClick={handleLogin}
+          type="submit"
+          onClick={() => handleLogin(formik.values)}
         >
           {isSignIn ? "Sign In" : "Sign Up"}
         </button>
