@@ -28,8 +28,6 @@ const Login = () => {
   const handleLogin = (values) => {
     const { email, password, name } = values;
 
-    const message = CheckValidData(email, password);
-    setErrorMessage(message);
     if (!isSignIn) {
       //signup logic
 
@@ -57,7 +55,7 @@ const Login = () => {
             })
             .catch((error) => {
               // An error occurred
-              setErrorMessage(error, message);
+              setErrorMessage(error);
             });
 
           // ...
@@ -81,7 +79,14 @@ const Login = () => {
         .catch((error) => {
           const errorCode = error.code;
           const errorMessage = error.message;
-          setErrorMessage(errorCode + "  " + errorMessage);
+          if (errorCode == "auth/invalid-credential") {
+            setErrorMessage(
+              "*Invalid credentials, please check email or password again"
+            );
+          } else {
+            // setErrorMessage(errorCode + "  " + errorMessage);
+            setErrorMessage("");
+          }
         });
     }
   };
@@ -206,7 +211,7 @@ const Login = () => {
           onBlur={formik.handleBlur}
           className="bg-gray-800 bg-opacity-75 p-4 m-2 w-full"
         />
-        {formik.touched.password && formik.errors.password ? (
+        {!isSignIn && formik.touched.password && formik.errors.password ? (
           <div className="text-red-800">{formik.errors.password}</div>
         ) : null}
 
@@ -214,7 +219,10 @@ const Login = () => {
           <p className="py-2 mx-2 text-red-800 font-bold">{errorMessage}</p>
         )}
         <button
-          className="p-4 m-2 bg-red-700 w-full rounded-lg font-bold"
+          disabled={!formik.touched.email || !formik.touched.password}
+          className="p-4 m-2 bg-red-700 w-full rounded-lg font-bold transform active:scale-75 transition-transform"
+          // className="shadow-lg filter-btn m-4 p-4 rounded-lg h-8 flex items-center border bg-gray-100 "
+
           type="submit"
           onClick={() => handleLogin(formik.values)}
         >
@@ -222,7 +230,7 @@ const Login = () => {
         </button>
 
         <p
-          className="cursor-pointer p-0 m-2 text-sm sm:text-md font-medium text-gray-300"
+          className="cursor-pointer p-0 m-2 text-sm sm:text-md font-medium text-gray-300 "
           onClick={() => toggleSignIn()}
         >
           {isSignIn
