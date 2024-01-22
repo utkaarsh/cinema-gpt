@@ -58,9 +58,9 @@ const Header = () => {
     dispatch(changeLanguage(e.target.value));
   };
   return (
-    <div className="absolute items-center px-4 bg-[darkslategray] sm:bg-transparent  bg-gradient-to-b from-black  z-10 w-full flex justify-center sm:justify-between text-white">
-      <div>
-        <img src={main_logo} className="h-40 " alt="logo" />
+    <div className=" absolute items-center sm:items-start px-4 bg-[darkslategray] sm:bg-transparent  bg-gradient-to-b from-black  z-10 w-full flex justify-center sm:justify-between text-white">
+      <div className="flex items-start">
+        <img src={main_logo} className="h-40 sm:-mt-10" alt="logo" />
       </div>
 
       {user && (
@@ -90,7 +90,7 @@ const Header = () => {
           />
           <button
             onClick={handleSignout}
-            className="bg-green-900 font-bold rounded-lg px-4 mx-2 flex items-center"
+            className="bg-green-900 font-bold rounded-lg px-6 mx-1 flex items-center"
           >
             Sign out-{user ? user.displayName : " "}
           </button>

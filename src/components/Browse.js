@@ -20,7 +20,7 @@ const Browse = () => {
   useTopTvShows();
 
   return (
-    <div className="">
+    <div className="bg-black text-white">
       <Header />
 
       {gptSearch ? (
