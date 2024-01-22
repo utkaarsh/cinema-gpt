@@ -24,6 +24,8 @@ Fetch Data for trailer video
 Update store with trailer video data
 Embeded the youtube play video and make it autoplay and mute
 Applied Tailwindcss to make it look so awesome
+\
+Building secondary component
 
 # Basic Featutres
 
