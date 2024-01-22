@@ -13,11 +13,11 @@ const VideoBackground = ({ movieId }) => {
         src={
           "https://www.youtube.com/embed/" +
           trailerVideo?.key +
-          "?&autoplay=1&mute=1"
+          "?&autoplay=1&mute=1&loop=1"
         }
         title="YouTube video player"
         frameBorder="0"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; "
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; loop; "
         allowFullScreen
       ></iframe>
     </div>
