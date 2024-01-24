@@ -12,6 +12,8 @@ import { addUser } from "../utils/redux/userSlice";
 import { USER_AVATAR } from "../utils/constants";
 import { ErrorMessage, useFormik } from "formik";
 import { validate } from "../utils/constants";
+import { EyeIcon, EyeOffIcon } from "@heroicons/react/solid";
+
 const Login = () => {
   const dispatch = useDispatch();
 
@@ -19,6 +21,10 @@ const Login = () => {
   const email = useRef();
   const password = useRef();
   const [errorMessage, setErrorMessage] = useState(null);
+  const [showPassword, setShowPassword] = useState(false);
+  const toggleShowPassword = () => {
+    setShowPassword(!showPassword);
+  };
 
   const [isSignIn, setIsSignIn] = useState(true);
   const toggleSignIn = () => {
@@ -200,16 +206,29 @@ const Login = () => {
           <div className="text-red-800">{formik.errors.email}</div>
         ) : null}
 
-        <input
-          id="password"
-          name="password"
-          type="password"
-          onChange={formik.handleChange}
-          value={formik.values.password}
-          placeholder="Password"
-          onBlur={formik.handleBlur}
-          className="bg-gray-800 bg-opacity-75 p-4 m-2 w-full"
-        />
+        <div className="flex items-center w-full bg-gray-800 bg-opacity-75 ml-2 my-2">
+          <input
+            id="password"
+            name="password"
+            type={showPassword ? "text" : "password"}
+            onChange={formik.handleChange}
+            value={formik.values.password}
+            placeholder="Password"
+            onBlur={formik.handleBlur}
+            className="bg-gray-800 bg-opacity-75 p-4  w-full"
+          />
+          <button
+            type="button"
+            onClick={toggleShowPassword}
+            className="absolute right-12 flex items-center pr-3 "
+          >
+            {showPassword ? (
+              <EyeOffIcon className="h-5 w-5 text-gray-500" />
+            ) : (
+              <EyeIcon className="h-5 w-5 text-gray-500" />
+            )}
+          </button>
+        </div>
         {!isSignIn && formik.touched.password && formik.errors.password ? (
           <div className="text-red-800">{formik.errors.password}</div>
         ) : null}

@@ -1,14 +1,17 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { onAuthStateChanged, signOut } from "firebase/auth";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { auth } from "../utils/firebase";
 import { useDispatch, useSelector } from "react-redux";
 import { addUser, removeUser } from "../utils/redux/userSlice";
 import { SUPPORTED_LANGUAGES, main_logo } from "../utils/constants";
 import { addToggleSearch } from "../utils/redux/gptSlice";
-import { changeLanguage } from "../utils/redux/configSlice";
+import { changeLanguage, setToggleHeader } from "../utils/redux/configSlice";
 
 const Header = () => {
+  // const [isOpen, setIsOpen] = useState(false);
+  const isOpen = useSelector((store) => store.config.toggleHeader);
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const gptSearch = useSelector((store) => store.gpt.toggleSearch);
@@ -43,8 +46,6 @@ const Header = () => {
   }, []);
   const user = useSelector((store) => store.user);
   const handleSignout = () => {
-    console.log("Signed Out");
-
     signOut(auth)
       .then(() => {
         // Sign-out successful.
@@ -57,17 +58,83 @@ const Header = () => {
   const handleLanguageChange = (e) => {
     dispatch(changeLanguage(e.target.value));
   };
+
+  const toggleMenu = () => {
+    dispatch(setToggleHeader());
+  };
   return (
-    <div className=" absolute items-center sm:items-start px-4 bg-[darkslategray] sm:bg-transparent  bg-gradient-to-b from-black  z-10 w-full flex justify-center sm:justify-between text-white">
-      <div className="flex items-start">
-        <img src={main_logo} className="h-40 sm:-mt-10" alt="logo" />
+    <div className=" absolute lg:flex lg:justify-between lg:items-center  px-4 bg-[darkslategray] lg:bg-transparent  bg-gradient-to-b from-black  z-10 w-full  text-white">
+      <div
+        className={`flex  ${
+          user ? "justify-between" : "justify-center"
+        } items-center `}
+      >
+        <Link to={"/"}>
+          {" "}
+          <div className="flex items-center">
+            <img
+              src={main_logo}
+              className={`${user ? "h-28" : "h-40"} sm:h-[7rem] `}
+              alt="logo"
+            />
+          </div>
+        </Link>
+        {user && (
+          <button
+            onClick={handleGptSearch}
+            className="lg:hidden bg-[darkgreen] font-bold rounded-lg px-4 items-center"
+          >
+            {gptSearch ? "Homepage" : " GPT Search"}
+          </button>
+        )}
+
+        {user && (
+          <div className="lg:hidden">
+            <button
+              onClick={toggleMenu}
+              className="text-white focus:outline-none"
+            >
+              {isOpen ? (
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  className="h-6 w-6"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M6 18L18 6M6 6l12 12"
+                  />
+                </svg>
+              ) : (
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  className="h-6 w-6"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M4 6h16M4 12h16m-7 6h7"
+                  />
+                </svg>
+              )}
+            </button>
+          </div>
+        )}
       </div>
 
       {user && (
-        <div className="flex p-4">
+        <div className={`p-4 lg:flex hidden }`}>
           {gptSearch && (
             <select
-              className="p-2 m-2 bg-gray-900 text-white"
+              className=" m-2  bg-gray-900 text-white"
               onChange={handleLanguageChange}
             >
               {SUPPORTED_LANGUAGES.map((lang) => (
@@ -77,25 +144,52 @@ const Header = () => {
               ))}
             </select>
           )}
+
           <button
             onClick={handleGptSearch}
-            className="hidden sm:flex bg-purple-900 font-bold rounded-lg px-4 items-center"
+            className=" bg-[greenyellow] text-black hover:bg-[darkgreen] hover:text-white h-12 font-bold rounded-lg px-4 items-center"
           >
             {gptSearch ? "Homepage" : " GPT Search"}
           </button>
-          <img
-            src={user?.photoURL}
-            alt="user-icon"
-            className="hidden sm:flex h-10 mx-2 rounded-lg"
-          />
+
           <button
             onClick={handleSignout}
-            className="bg-green-900 font-bold rounded-lg px-6 mx-1 flex items-center"
+            className="h-12 bg-green-900 hover:bg-[lightgreen] hover:text-black font-bold rounded-lg px-6 mx-1 flex items-center"
           >
-            Sign out-{user ? user.displayName : " "}
+            Sign out - {user ? user.displayName : " "}
+            <img
+              src={user?.photoURL}
+              alt="user-icon"
+              className=" h-8 mx-2 rounded-lg"
+            />
           </button>
         </div>
       )}
+
+      <div className={`${isOpen ? "flex flex-col" : "hidden"} font-bold my-2`}>
+        <Link className="py-2 " to={"/"}>
+          Home
+        </Link>
+        {gptSearch && (
+          <select
+            className=" bg-[darkslategray] text-white"
+            onChange={handleLanguageChange}
+          >
+            {SUPPORTED_LANGUAGES.map((lang) => (
+              <option
+                className=""
+                key={lang.identifier}
+                value={lang.identifier}
+              >
+                {lang.name}
+              </option>
+            ))}
+          </select>
+        )}
+        <Link className="py-2" onClick={handleSignout}>
+          Sign out ({user ? user.displayName : " "})
+        </Link>
+      </div>
     </div>
   );
 };

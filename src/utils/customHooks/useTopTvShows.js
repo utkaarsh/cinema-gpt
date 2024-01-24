@@ -18,7 +18,6 @@ const useTopTvShows = () => {
       options
     );
     const Json = await data.json();
-    // console.log("json", Json);
     setNowPlaying(Json.results);
     dispatch(addTopTvShows(Json.results));
   };
