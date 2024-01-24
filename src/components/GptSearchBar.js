@@ -27,7 +27,7 @@ const GptSearchBar = () => {
   const handleGptSearch = async () => {
     //Make a API call to GPT API and get searched movies results
     const gptQuery =
-      "Act as a Movie Recommendation system and suggest some movies for the query" +
+      "Act as a searchbox if any moviename is recognized just display the name of the movie or as a Movie Recommendation system and suggest some movies for the query" +
       searchText.current.value +
       "only give me names of 5 movies, comma seperated like the example result given ahead. Example Result: Gadar,12th fail,Sholay,Dhamaal,Dhol";
     const gptResults = await openai.chat.completions.create({
