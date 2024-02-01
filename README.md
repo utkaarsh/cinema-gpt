@@ -2,8 +2,11 @@
 
 ## Movies recomandation with AI
 
+Home
 ![Homepage](Homepage.png)
+GPT Search
 ![searchResults](searchResults.png)
+
 ![demo](demo.gif)
 
 ### How it works
