@@ -13,13 +13,11 @@ The more complicated way to build this would be to create word embeddings for th
 ```js
 REACT_APP_OPENAI_KEY = YOUR_API_KEY_WILL_HERE;
 REACT_APP_TMDB_KEY = YOUR_API_KEY_WILL_HERE;
+```
 
 ## Link
+
 Live Demo : [Live Demo](https://cinema-gpt.web.app/ "Live Demo")
-
-
-
-
 
 ### Objectives Accomplished
 
@@ -48,4 +46,7 @@ Embeded the youtube play video and make it autoplay and mute
 Applied Tailwindcss to make it look so awesome
 Building secondary component
 dispaly movies list categorywise
+
+```
+
 ```
