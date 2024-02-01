@@ -32,6 +32,8 @@ Live Demo : [Live Demo](https://cinema-gpt.web.app/ "Live Demo")
 
 ### Objectives Accomplished
 
+```
+
 create react app
 configured tailwind css
 routing of app
@@ -58,6 +60,5 @@ Applied Tailwindcss to make it look so awesome
 Building secondary component
 dispaly movies list categorywise
 
-```
 
 ```
