@@ -1,5 +1,15 @@
 # Cinema GPT
 
+## Semantic Search for Movies using GPT-3.5
+
+### How it works
+
+We pass the user's query with a prompt describing what we want to `gpt-3.5-turbo` and get a valid array of movies as a response. Then we can just call The Movie Database API to get the movie details.
+
+The more complicated way to build this would be to create word embeddings for the movie titles and descriptions, store those embeddings in some vector datastore, and then use cosine similarity (or some related algorithm) to find the most similar movies. GPT already has these embeddings since most of these movies are mentioned somewhere in the massive pretraining data, so it's a lot easier to just use that.
+
+### Objectives Accomplished
+
 create react app
 configured tailwind css
 routing of app
@@ -13,7 +23,6 @@ secured login route
 redirect to browse page only if authenticated
 unsubscribed to OnAuthStateChaned callback
 added hardcoded values to constant files
-
 Registered on TMDB API and get access token
 Get Data from TMDB Now playing movies API
 Custom Hooks for Now Playing Movies
@@ -24,26 +33,5 @@ Fetch Data for trailer video
 Update store with trailer video data
 Embeded the youtube play video and make it autoplay and mute
 Applied Tailwindcss to make it look so awesome
-\
 Building secondary component
-
-# Basic Featutres
-
--Signin/Signup Form
-redirect to browse page only if authenticated
-
--Browse
-Header
-Main Movie
-Trailor in the background
-Title and description
-
--Cinema GPT
-Search Bar
-Movie Suggestions
-
-# Home Page
-
--Main Container (parent component)
-first half background playing trailer with title upfront (child components)
--second half list of movies (child components)
+dispaly movies list categorywise

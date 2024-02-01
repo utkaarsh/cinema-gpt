@@ -48,9 +48,12 @@ const GptSearchBar = () => {
 
   return (
     <div className=" z-20 ">
+      <h1 className="text-2xl sm:text-6xl text-white text-center mb-4 font-bold">
+        Cinema GPT 🍿
+      </h1>
       <form
         onSubmit={(e) => e.preventDefault()}
-        className="flex items-center justify-center w-1/2 lg:w-full mx-auto my-4 bg"
+        className="flex  items-center justify-center w-1/2 lg:w-full mx-auto my-4 bg"
       >
         <input
           type="text"

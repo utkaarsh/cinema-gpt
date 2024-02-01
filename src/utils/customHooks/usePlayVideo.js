@@ -1,12 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { options } from "../constants";
-import { useDispatch, useSelector } from "react-redux";
-import { addTrailer } from "../redux/movieSlice";
 
-const useTrailerVideos = (id) => {
+const usePlayVideo = (id) => {
   console.log("Recieved ID", id);
-  const dispatch = useDispatch();
-  const trailerVideo = useSelector((store) => store.movies.trailerVideo);
+  const [video, setVideo] = useState(null);
 
   const fetchVideo = async () => {
     const data = await fetch(
@@ -15,17 +12,17 @@ const useTrailerVideos = (id) => {
     );
     const Json = await data.json();
     const videos = Json.results;
-    const trailers = videos?.filter((video) => video.type === "Trailer");
-    const sortedVideos = trailers?.sort(
+    const clips = videos?.filter((video) => video.type === "Clip");
+    const sortedVideos = clips?.sort(
       (a, b) => new Date(b.published_at) - new Date(a.published_at)
     );
     const mainVideo = sortedVideos ? sortedVideos[0] : videos ? videos[0] : "";
-    console.log("CONSOLE", mainVideo);
-    dispatch(addTrailer(mainVideo));
+    setVideo(mainVideo);
   };
   useEffect(() => {
-    !trailerVideo && fetchVideo();
+    fetchVideo();
   }, []);
+  return video;
 };
 
-export default useTrailerVideos;
+export default usePlayVideo;

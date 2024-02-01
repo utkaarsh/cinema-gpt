@@ -7,12 +7,12 @@ const GetMovieSuggestions = () => {
   const { moviesName, moviesResult } = useSelector((store) => store.gpt);
 
   return (
-    <div className="p-4  bg-opacity-90 bg-black text-black  ">
+    <div className="mx-24 p-4  bg-opacity-80 bg-black text-black overflow-y-scroll no-scrollbar max-h-[30rem] w-[23rem] sm:w-[42rem] lg:w-[72rem] flex flex-col  justify-center">
       <h1 className="font-bold text-3xl m-2 text-white">
         Hey {user} there you have{" "}
       </h1>
 
-      <div>
+      <div className="flex flex-col overflow-x-scroll no-scrollbar">
         {moviesName?.map((movie, index) => (
           <MovieList title={movie} key={movie} movies={moviesResult[index]} />
         ))}

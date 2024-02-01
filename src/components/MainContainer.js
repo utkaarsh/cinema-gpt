@@ -17,7 +17,7 @@ const MainContainer = () => {
         isOpen ? "pt-[10rem]" : "pt-[7rem]"
       } lg:pt-0 text-black font-bold`}
     >
-      <VideoTitle title={original_title} overview={overview} />
+      <VideoTitle title={original_title} overview={overview} videoId={id} />
       <VideoBackground movieId={id} />
     </div>
   );

@@ -62,6 +62,7 @@ const Header = () => {
   const toggleMenu = () => {
     dispatch(setToggleHeader());
   };
+
   return (
     <div className=" absolute lg:flex lg:justify-between lg:items-center  px-4 bg-[darkslategray] lg:bg-transparent  bg-gradient-to-b from-black  z-10 w-full  text-white">
       <div
@@ -69,7 +70,7 @@ const Header = () => {
           user ? "justify-between" : "justify-center"
         } items-center `}
       >
-        <Link to={"/"}>
+        <Link to={"/browse"}>
           {" "}
           <div className="flex items-center">
             <img
@@ -80,12 +81,14 @@ const Header = () => {
           </div>
         </Link>
         {user && (
-          <button
-            onClick={handleGptSearch}
-            className="lg:hidden bg-[darkgreen] font-bold rounded-lg px-4 items-center"
-          >
-            {gptSearch ? "Homepage" : " GPT Search"}
-          </button>
+          <Link to={gptSearch ? "/browse" : "/gptsearch"}>
+            <button
+              onClick={handleGptSearch}
+              className="lg:hidden bg-[darkgreen] font-bold rounded-lg px-4 items-center"
+            >
+              {gptSearch ? "Homepage" : " GPT Search"}
+            </button>
+          </Link>
         )}
 
         {user && (
@@ -145,16 +148,18 @@ const Header = () => {
             </select>
           )}
 
-          <button
-            onClick={handleGptSearch}
-            className=" bg-[greenyellow] text-black hover:bg-[darkgreen] hover:text-white h-12 font-bold rounded-lg px-4 items-center"
-          >
-            {gptSearch ? "Homepage" : " GPT Search"}
-          </button>
+          <Link to={gptSearch ? "/browse" : "/gptsearch"}>
+            <button
+              onClick={handleGptSearch}
+              className=" bg-[white] text-black hover:bg-[greenyellow] hover:text-black h-12 font-bold rounded-lg px-4 items-center"
+            >
+              {gptSearch ? "Homepage" : " GPT Search "}
+            </button>
+          </Link>
 
           <button
             onClick={handleSignout}
-            className="h-12 bg-green-900 hover:bg-[lightgreen] hover:text-black font-bold rounded-lg px-6 mx-1 flex items-center"
+            className="h-12 bg-green-950 hover:bg-[lightgreen] hover:text-black font-bold rounded-lg px-6 mx-1 flex items-center"
           >
             Sign out - {user ? user.displayName : " "}
             <img
