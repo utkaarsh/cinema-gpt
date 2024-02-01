@@ -9,7 +9,7 @@ import MovieList from "./MovieList";
 const Detailed = () => {
   const { movieId } = useParams();
   const isOpen = useSelector((store) => store.config.toggleHeader);
-  const similar = useSimilar();
+  const similar = useSimilar(movieId);
   console.log("Simlar", similar);
   const [details, setDetails] = useState(null);
   useEffect(() => {
@@ -36,8 +36,8 @@ const Detailed = () => {
 
   return (
     <div className="flex-1 ">
-      <div className=" flex-1 bg-black bg-opacity-100 py-14">
-        <div className="absolute hidden sm:flex opacity-85  ">
+      <div className=" flex-1 bg-black bg-opacity-90 py-14">
+        <div className="absolute hidden sm:flex opacity-95  ">
           <img
             src={BG_POSTER}
             alt="POSTER"
@@ -75,7 +75,7 @@ const Detailed = () => {
             </Link>
           </div>
         </div>
-        <div className="flex pt-[50rem] sm:pt-[35rem]  overflow-x-scroll no-scrollbar">
+        <div className="flex pt-[50rem] sm:pt-[36rem]  overflow-x-scroll no-scrollbar">
           {similar && <MovieList title={"Similar"} movies={similar} />}
         </div>
       </div>

@@ -7,7 +7,7 @@ const GetMovieSuggestions = () => {
   const { moviesName, moviesResult } = useSelector((store) => store.gpt);
 
   return (
-    <div className="mx-24 p-4  bg-opacity-80 bg-black text-black overflow-y-scroll no-scrollbar max-h-[30rem] w-[23rem] sm:w-[42rem] lg:w-[72rem] flex flex-col  justify-center">
+    <div className="mx-24 p-4  my-8 bg-opacity-80 bg-black text-black overflow-y-scroll no-scrollbar max-h-[40rem] w-[23rem] sm:w-[42rem] lg:w-[72rem] flex flex-col  justify-center">
       <h1 className="font-bold text-3xl m-2 text-white">
         Hey {user} there you have{" "}
       </h1>

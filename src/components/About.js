@@ -1,6 +1,9 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 const About = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  });
   return (
     <div className="about-us h-screen pt-36 sm:pt-60 items-center px-4 md:px-24 bg-black">
       <h1 className="text-2xl sm:text-5xl  text-white text-center mb-8 font-bold">

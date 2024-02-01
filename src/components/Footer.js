@@ -22,7 +22,7 @@ const Footer = () => {
             </li>
             <li>
               <a
-                href="https://www.linkedin.com/in/okneerajsingh/"
+                href="https://www.linkedin.com/in/utkarsh-r-6b6b05219/"
                 target="_blank"
                 rel="noreferrer"
                 className="hover:underline"
