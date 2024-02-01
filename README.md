@@ -8,6 +8,19 @@ We pass the user's query with a prompt describing what we want to `gpt-3.5-turbo
 
 The more complicated way to build this would be to create word embeddings for the movie titles and descriptions, store those embeddings in some vector datastore, and then use cosine similarity (or some related algorithm) to find the most similar movies. GPT already has these embeddings since most of these movies are mentioned somewhere in the massive pretraining data, so it's a lot easier to just use that.
 
+- Create `.env` file and put configure
+
+```js
+REACT_APP_OPENAI_KEY = YOUR_API_KEY_WILL_HERE;
+REACT_APP_TMDB_KEY = YOUR_API_KEY_WILL_HERE;
+
+## Link
+Live Demo : [Live Demo](https://cinema-gpt.web.app/ "Live Demo")
+
+
+
+
+
 ### Objectives Accomplished
 
 create react app
@@ -35,3 +48,4 @@ Embeded the youtube play video and make it autoplay and mute
 Applied Tailwindcss to make it look so awesome
 Building secondary component
 dispaly movies list categorywise
+```
