@@ -1,6 +1,6 @@
 # Cinema GPT
 
-## Movies recomandation with AI
+## Movies browsing and recomandations with AI
 
 Home
 
@@ -9,8 +9,6 @@ Home
 GPT Search
 
 ![searchResults](searchResults.png)
-
-![demo](demo.gif)
 
 ### How it works
 
