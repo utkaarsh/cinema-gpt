@@ -2,7 +2,7 @@
 
 ## Movies recomandation with AI
 
-(login.png)
+![login](login.png)
 (Homepage.png)
 (searchResults.png)
 ![demo](demo.gif)
