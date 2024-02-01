@@ -1,6 +1,8 @@
 # Cinema GPT
 
-## Semantic Search for Movies using GPT-3.5
+## Movies recomandation with AI
+
+![demo](demo.gif)
 
 ### How it works
 
@@ -11,8 +13,9 @@ The more complicated way to build this would be to create word embeddings for th
 - Create `.env` file and put configure
 
 ```js
-REACT_APP_OPENAI_KEY = YOUR_API_KEY_WILL_HERE;
-REACT_APP_TMDB_KEY = YOUR_API_KEY_WILL_HERE;
+REACT_APP_OPENAI_KEY = YOUR_API_KEY_WILL_BE_HERE;
+REACT_APP_TMDB_KEY = YOUR_API_KEY_WILL_BE_HERE;
+REACT_APP_FIREBASE_API_KEY = YOUR_API_KEY_WILL_BE_HERE;
 ```
 
 ## Link

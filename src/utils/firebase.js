@@ -7,7 +7,7 @@ import { getAuth } from "firebase/auth";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyC9GEYvm27ddUu-PNs8NgtspttHCzNuAZo",
+  apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
   authDomain: "cinema-gpt.firebaseapp.com",
   projectId: "cinema-gpt",
   storageBucket: "cinema-gpt.appspot.com",
