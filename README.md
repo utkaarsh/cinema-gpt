@@ -3,6 +3,9 @@
 ## Movies recomandation with AI
 
 ![demo](demo.gif)
+![demo](login.png)
+![demo](Homepage.png)
+![demo](searchResults.png)
 
 ### How it works
 
