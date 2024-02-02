@@ -70,7 +70,7 @@ const Header = () => {
           user ? "justify-between" : "justify-center"
         } items-center `}
       >
-        <Link to={"/browse"}>
+        <Link to={user ? "/browse" : "/"}>
           {" "}
           <div className="flex items-center">
             <img
