@@ -16,11 +16,10 @@ const About = () => {
         <br />
         Dive into the world of Cinema GPT, a carefully crafted Netflix clone
         that boasts an impressive tech stack including React, Redux, Webpack,
-        React Router, TMDB APIs, Tailwind CSS, Firebase, React-DOM, and Jest.
-        The result? An exceptional web application designed for optimal
-        performance and seamless user interactions Discover a user-friendly
-        interface that offers an immersive viewing experience, all in the palm
-        of your hand.
+        React Router, TMDB APIs, Tailwind CSS, Firebase, React-DOM. The result?
+        An exceptional web application designed for optimal performance and
+        seamless user interactions Discover a user-friendly interface that
+        offers an immersive viewing experience, all in the palm of your hand.
         <br />
         <p className="hidden sm:flex">
           {" "}

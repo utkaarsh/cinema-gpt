@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { options } from "../constants";
 
 const usePlayVideo = (id) => {
-  console.log("Recieved ID", id);
   const [video, setVideo] = useState(null);
 
   const fetchVideo = async () => {

@@ -10,7 +10,6 @@ const Detailed = () => {
   const { movieId } = useParams();
   const isOpen = useSelector((store) => store.config.toggleHeader);
   const similar = useSimilar(movieId);
-  console.log("Simlar", similar);
   const [details, setDetails] = useState(null);
   useEffect(() => {
     fetchDetails();
@@ -24,12 +23,10 @@ const Detailed = () => {
     setDetails(Json);
   };
   if (!details) return <h2>Loading</h2>;
-  if (details) console.log("Detail", details);
 
   const { genres, title, overview, backdrop_path, poster_path, vote_average } =
     details;
   const BG_POSTER = "https://image.tmdb.org/t/p/w780" + backdrop_path;
-  if (BG_POSTER) console.log(BG_POSTER);
   const genre_names = genres?.map((genre) => genre.name);
   const genre = genre_names.join(", ");
   if (!BG_POSTER) <h2>Loading</h2>;

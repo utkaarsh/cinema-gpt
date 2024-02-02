@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { addTrailer } from "../redux/movieSlice";
 
 const useTrailerVideos = (id) => {
-  console.log("Recieved ID", id);
   const dispatch = useDispatch();
   const trailerVideo = useSelector((store) => store.movies.trailerVideo);
 
@@ -20,7 +19,6 @@ const useTrailerVideos = (id) => {
       (a, b) => new Date(b.published_at) - new Date(a.published_at)
     );
     const mainVideo = sortedVideos ? sortedVideos[0] : videos ? videos[0] : "";
-    console.log("CONSOLE", mainVideo);
     dispatch(addTrailer(mainVideo));
   };
   useEffect(() => {
