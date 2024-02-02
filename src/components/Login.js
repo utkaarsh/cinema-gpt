@@ -143,11 +143,11 @@ const Login = () => {
   // };
 
   return (
-    <div className="sm:bg-blur sm:backdrop-blur-2xl h-screen sm:bg-cover sm:bg-no-repeat sm:bg-[url('https://assets.nflxext.com/ffe/siteui/vlv3/df6621a3-890c-4ca0-b698-90bd5152f3d1/20a59be7-7062-4991-bca0-805e9a7f2716/IN-en-20240107-trifectadaily-perspective_alpha_website_large.jpg')] ">
+    <div className="sm:bg-blur sm:backdrop-blur-2xl bg-black text-white h-screen sm:bg-cover sm:bg-no-repeat sm:bg-[url('https://assets.nflxext.com/ffe/siteui/vlv3/df6621a3-890c-4ca0-b698-90bd5152f3d1/20a59be7-7062-4991-bca0-805e9a7f2716/IN-en-20240107-trifectadaily-perspective_alpha_website_large.jpg')] ">
       <form
         onSubmit={(e) => e.preventDefault()}
         action=""
-        className="  absolute my-32 mx-auto right-0 left-0 min-h-[90%] sm:h-auto sm:min-h-[35rem]  w-full sm:w-6/12 lg:w-3/12  p-12 bg-black bg-opacity-85 text-white"
+        className="  absolute my-32 mx-auto right-0 left-0 min-h-[85%] sm:h-auto sm:min-h-[35rem]  w-full sm:w-6/12 lg:w-3/12  p-12 bg-black bg-opacity-85 text-white"
       >
         <h1 className="font-bold text-lg sm:text-3xl py-4">
           {isSignIn ? "Sign In" : "Sign Up"}
