@@ -11,6 +11,8 @@ import Footer from "./components/Footer";
 import GptSearch from "./components/GptSearch";
 import NotFoundPage from "./components/Error";
 import About from "./components/About";
+import QRCodeFuction from "./components/QRCode";
+import QRCodeComponent from "./components/QRCode";
 
 export const appRouter = createBrowserRouter([
   {
@@ -49,9 +51,10 @@ function App() {
   return (
     <Provider store={appStore}>
       <div>
-        <Header />
+        <QRCodeComponent />
+        {/* <Header />
         <Outlet />
-        <Footer />
+        <Footer /> */}
       </div>
     </Provider>
   );
