@@ -62,10 +62,10 @@ function App() {
   return (
     <Provider store={appStore}>
       <div>
-        <QRCodeComponent />
-        {/* <Header />
+        {/* <QRCodeComponent /> */}
+        <Header />
         <Outlet />
-        <Footer /> */}
+        <Footer />
       </div>
     </Provider>
   );
