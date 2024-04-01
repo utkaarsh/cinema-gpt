@@ -14,6 +14,13 @@ import About from "./components/About";
 import QRCodeFuction from "./components/QRCode";
 import QRCodeComponent from "./components/QRCode";
 
+const RedirectToGoogleDrive = () => {
+  window.location.replace(
+    "https://drive.google.com/file/d/1Dwy3Tt6-axrqSXbna_4_oPaYnuHql0ES/view"
+  );
+  return null;
+};
+
 export const appRouter = createBrowserRouter([
   {
     path: "/",
@@ -22,6 +29,10 @@ export const appRouter = createBrowserRouter([
       {
         path: "/",
         element: <Login />,
+      },
+      {
+        path: "/gdrive",
+        element: <RedirectToGoogleDrive />,
       },
       {
         path: "/browse",
