@@ -4,6 +4,7 @@ import lang from "../utils/languageConstants";
 import { openai } from "../utils/openai";
 import { options } from "../utils/constants";
 import { addGptMovies, clearList } from "../utils/redux/gptSlice";
+import genAI from "../utils/gemeni_ai";
 
 // const gptQuery =
 //   "Act as a searchbox if any movie name is recognized or also any related words too just display the name of the movies" +
@@ -31,16 +32,25 @@ const GptSearchBar = () => {
   };
   const handleGptSearch = async () => {
     //Make a API call to GPT API and get searched movies results
+    const model = genAI.getGenerativeModel({ model: "gemini-pro" });
+
     const gptQuery =
       "Act as a Movie Recommendation system and suggest some movies or Act as a searchbox if any movie name is recognized or also any related words too just display the name of the movies for the query : " +
       searchText.current.value +
       ". only give me names of 5 movies, comma seperated like the example result given ahead. Example Result: Gadar, Sholay, Don, Golmaal, Koi Mil Gaya";
-    const gptResults = await openai.chat.completions.create({
-      messages: [{ role: "user", content: gptQuery }],
-      model: "gpt-3.5-turbo",
-    });
-    if (!gptResults.choices) return "Data not fetched";
-    const gptMovies = gptResults?.choices[0]?.message?.content.split(",");
+    // const gptResults = await openai.chat.completions.create({
+    //   messages: [{ role: "user", content: gptQuery }],
+    //   model: "gpt-3.5-turbo",
+    // });
+    const gptResults = await model.generateContent(gptQuery);
+    console.log("SEARCHED ", gptResults);
+    // if (!gptResults.choices) return "Data not fetched";
+    if (!gptResults.response.candidates[0].content.parts)
+      return "Data not fetched";
+    // const gptMovies = gptResults?.choices[0]?.message?.content.split(",");
+    const gptMovies =
+      gptResults.response.candidates[0].content.parts[0].text.split(",");
+    console.log("Filtered data", gptMovies);
     const promiseArray = gptMovies.map((movie) => fetchSearchData(movie));
     const getResults = await Promise.all(promiseArray);
     dispatch(addGptMovies({ moviesName: gptMovies, moviesResult: getResults }));

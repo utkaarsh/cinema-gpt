@@ -50,3 +50,4 @@ export const SUPPORTED_LANGUAGES = [
 ];
 
 export const OPENAI_API_KEY = process.env.REACT_APP_OPENAI_API_KEY;
+export const GEMENI_API_KEY = process.env.REACT_APP_GEMENI_API_KEY;

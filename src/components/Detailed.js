@@ -38,7 +38,7 @@ const Detailed = () => {
           <img
             src={BG_POSTER}
             alt="POSTER"
-            className="-z-20 opacity-20 w-full sm:w-screen sm:h-[580px] "
+            className="-z-20 opacity-20 w-full sm:w-screen -mt-20 bg-cover"
           />
         </div>
         <div
@@ -49,7 +49,7 @@ const Detailed = () => {
           <div className=" flex justify-center ">
             <img
               src={IMG_CDN + poster_path}
-              className="h-64  sm:h-96 shadow-xl "
+              className="h-64  sm:h-[26rem] shadow-xl "
               alt=""
             />
           </div>
@@ -63,7 +63,7 @@ const Detailed = () => {
             <h2 className="text-lg sm:text-2xl font-semibold my-2 text-gray-300">
               Overview{" "}
             </h2>
-            <h2 className="text-gray-300 text-xs">{overview}</h2>
+            <h2 className="text-gray-300 text-md">{overview}</h2>
             <Link to={"/watch/" + movieId}>
               <button className="hover:bg-opacity-50 mx-2 my-4 px-3 lg:py-3 lg:px-12  text-lg sm:text-lg text-black bg-white flex items-center">
                 <img src={playIcon} className="h-10 lg:h-12" alt="playIcon" />{" "}
