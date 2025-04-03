@@ -1,7 +1,6 @@
 import React, { useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import lang from "../utils/languageConstants";
-import { openai } from "../utils/openai";
 import { options } from "../utils/constants";
 import { addGptMovies, clearList } from "../utils/redux/gptSlice";
 import genAI from "../utils/gemeni_ai";
@@ -32,7 +31,7 @@ const GptSearchBar = () => {
   };
   const handleGptSearch = async () => {
     //Make a API call to GPT API and get searched movies results
-    const model = genAI.getGenerativeModel({ model: "gemini-pro" });
+    const model = genAI.getGenerativeModel({ model: "gemini-1.5-pro" });
 
     const gptQuery =
       "Act as a Movie Recommendation system and suggest some movies or Act as a searchbox if any movie name is recognized or also any related words too just display the name of the movies for the query : " +

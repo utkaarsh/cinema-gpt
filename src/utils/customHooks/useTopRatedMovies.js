@@ -13,10 +13,11 @@ const useTopRatedMovies = () => {
   }, []);
 
   const getNowPlaying = async () => {
-    const data = await fetch(
-      "https://api.themoviedb.org/3/movie/top_rated",
-      options
-    );
+    const url =
+      "https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=1";
+
+    const data = await fetch(url, options);
+
     const Json = await data.json();
     setNowPlaying(Json.results);
     dispatch(addTopRatedMovies(Json.results));

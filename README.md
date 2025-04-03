@@ -28,6 +28,12 @@ REACT_APP_FIREBASE_API_KEY = YOUR_API_KEY_WILL_BE_HERE;
 
 Live Demo : [Live Demo](https://cinema-gpt.web.app/ "Live Demo")
 
+## IMP NOTE
+
+This might not work in some browsers by default so please enablle Google DNS in Chrome Setting > privacy & securtity > securtity > Select DNS Provider- Google DNS
+
+this is due to third party API issue from TMDB
+
 ### Objectives Accomplished
 
 ```

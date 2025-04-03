@@ -31,10 +31,6 @@ export const appRouter = createBrowserRouter([
         element: <Login />,
       },
       {
-        path: "/gdrive",
-        element: <RedirectToGoogleDrive />,
-      },
-      {
         path: "/browse",
         element: <Browse />,
       },

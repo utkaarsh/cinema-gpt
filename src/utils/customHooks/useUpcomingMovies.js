@@ -13,10 +13,10 @@ const useUpcomingMovies = () => {
   }, []);
 
   const getNowPlaying = async () => {
-    const data = await fetch(
-      "https://api.themoviedb.org/3/movie/upcoming",
-      options
-    );
+    const url =
+      "https://api.themoviedb.org/3/movie/upcoming?language=en-US&page=1";
+
+    const data = await fetch(url, options);
     const Json = await data.json();
     setNowPlaying(Json.results);
     dispatch(addUpcomingMovies(Json.results));
